@@ -34,3 +34,19 @@ jobs:
         with:
           name: Titan-Screen-Reader-APK
           path: TitanScreenReader/app/build/outputs/apk/debug/*.apk
+      - name: Unzip and Setup
+        run: |
+          unzip -o TitanScreenReader_WebBuild.zip
+          cd TitanScreenReader
+          chmod +x gradlew || true
+
+      - name: Build APK
+        run: |
+          cd TitanScreenReader
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Titan-Screen-Reader-APK
+          path: TitanScreenReader/app/build/outputs/apk/debug/*.apk
